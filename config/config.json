@@ -1,0 +1,18 @@
+{
+    "privateKey": "MyPrivateKey",
+    "adminPassword": [
+        "Admin1",
+        "Admin2"
+    ],
+    "PORT": 8080,
+    "mysqlCred": {
+        "HOST": "localhost",
+        "USER": "root",
+        "PASSWORD": "password",
+        "DATABASE": "db-cab-booking-api"
+    },
+    "mongoCred": {
+        "DB": "db-cab-booking-api",
+        "COLLECTION": "logs"
+    }
+}
