@@ -16,15 +16,15 @@ var appGeocoder = NodeGeocoder(options);
 module.exports.getLatLong = getLatLong;
 
 //Function definition
-function getLatLong(address) {
+const getLatLong = (address) => {
   return new Promise((resolve, reject) => {
-    appGeocoder.geocode({ address: address, country: 'India', city: 'Chandigarh' }, function (err, result) {
+    appGeocoder.geocode({ address: address, country: 'India', city: 'Chandigarh' }, (err, result) => {
       if (err) {
         reject(err);
       }
-      if(result[0]==undefined){
+      if (result[0] == undefined) {
         reject('NOT FOUND');
-      }else{
+      } else {
         const arrayLatLong = [result[0].longitude, result[0].latitude];
         resolve(arrayLatLong);
       }

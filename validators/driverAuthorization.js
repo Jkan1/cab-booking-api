@@ -12,7 +12,7 @@ module.exports.validateToken = validateToken
 
 //All function definitions
 
-function passwordToHash(req, res, next){
+const passwordToHash = (req, res, next) => {
 	bcrypt.genSalt(saltRounds, (err, salt) => {
 		bcrypt.hash(req.body.confirmPassword, salt, (err, hash) => {
 			if (err) {
@@ -30,7 +30,7 @@ function passwordToHash(req, res, next){
 	});
 }
 
-async function checkLoginCredential(req, res, next){
+const checkLoginCredential = async (req, res, next) => {
 	let hash = await driverService.getDriverHash(req, res);
 	if (hash == undefined) {
 		res.send({
@@ -45,7 +45,7 @@ async function checkLoginCredential(req, res, next){
 	}
 }
 
-function hashToPassword(req, res, next){
+const hashToPassword = (req, res, next) => {
 	bcrypt.compare(req.body.password, req.hash, function (err, check) {
 		if (err) {
 			res.send({
@@ -69,7 +69,7 @@ function hashToPassword(req, res, next){
 	})
 }
 
-function generateToken(req, res, next){
+const generateToken = (req, res, next) => {
 	const payLoad = {
 		email: req.body.email
 	}
@@ -88,7 +88,7 @@ function generateToken(req, res, next){
 	});
 }
 
-function getEmailByToken(req, res){
+const getEmailByToken = (req, res) => {
 	return new Promise((resolve, reject) => {
 		jwt.verify(req.body.token, CONFIG.privateKey, (err, data) => {
 			if (err) {
@@ -101,7 +101,7 @@ function getEmailByToken(req, res){
 	})
 }
 
-async function validateToken(req, res, next){
+const validateToken = async (req, res, next) => {
 	try {
 		let email = await getEmailByToken(req, res);
 		if (email == '') {

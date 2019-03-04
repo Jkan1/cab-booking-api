@@ -11,7 +11,7 @@ module.exports.validateToken = validateToken;
 
 //All function definitions
 
-async function checkCredentials(req, res, next) {
+const checkCredentials = async (req, res, next) => {
 	try {
 		const password = req.body.password;
 		let passwordHash = await customerService.checkEmailExistance(req, res)
@@ -45,7 +45,7 @@ async function checkCredentials(req, res, next) {
 	}
 }
 
-function passwordToHash(req, res, next) {
+const passwordToHash = (req, res, next) => {
 	bcrypt.genSalt(saltRounds, (err, salt) => {
 		bcrypt.hash(req.body.confirmPassword, salt, (err, hash) => {
 			if (err) {
@@ -63,7 +63,7 @@ function passwordToHash(req, res, next) {
 	});
 }
 
-function generateToken(req, res, next) {
+const generateToken = (req, res, next) => {
 	const payLoad = {
 		email: req.body.email
 	}
@@ -82,7 +82,7 @@ function generateToken(req, res, next) {
 	});
 }
 
-async function validateToken(req, res, next) {
+const validateToken = async (req, res, next) => {
 	let email = await customerService.getEmailByToken(req, res);
 	if (email == undefined) {
 		res.send({

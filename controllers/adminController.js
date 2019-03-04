@@ -10,7 +10,7 @@ module.exports.closeDbConnection = closeDbConnection;
 module.exports.adminLogout = adminLogout;
 
 //All function definitions
-function closeDbConnection(req, res) {
+const closeDbConnection = (req, res) => {
 	Promise.coroutine(function* () {
 		let resolvedMessage = yield adminService.closeConnection();
 	})().then(() => {
@@ -27,7 +27,7 @@ function closeDbConnection(req, res) {
 	});
 }
 
-async function adminLoginDetails(req, res) {
+const adminLoginDetails = async (req, res) => {
 	let getAdminDetals = await adminService.fetchAdminDetails(req.body.email)
 	if (getAdminDetals == undefined) {
 		res.json({
@@ -49,7 +49,7 @@ async function adminLoginDetails(req, res) {
 	}
 }
 
-async function viewFreeDrivers(req, res) {
+const viewFreeDrivers = async (req, res) => {
 	let viewDrivers = await adminService.fetchFreeDriversByRatings()
 	if (viewDrivers[0] == undefined) {
 		res.json({
@@ -67,7 +67,7 @@ async function viewFreeDrivers(req, res) {
 	}
 }
 
-async function viewPendingBookings(req, res) {
+const viewPendingBookings = async (req, res) => {
 	let pendingBookings = await adminService.fetchPendingBookings()
 	if (pendingBookings[0] == undefined) {
 		res.json({
@@ -85,7 +85,7 @@ async function viewPendingBookings(req, res) {
 	}
 }
 
-async function assignDriver(req, res) {
+const assignDriver = async (req, res) => {
 	try {
 		const availableDriverStatus = await adminService.getAvailableDriverCheck(req.body.driverID);
 		if (availableDriverStatus == undefined) {
@@ -154,7 +154,7 @@ async function assignDriver(req, res) {
 	}
 }
 
-async function adminLogout(req, res) {
+const adminLogout = (req, res) => {
 	//DELETE ADMIN TOKEN
 	res.json({
 		statusCode: CONSTANTS.responseStatusCode.ACTION_COMPLETE,

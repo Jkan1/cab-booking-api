@@ -9,7 +9,7 @@ module.exports.driverLogout = driverLogout;
 
 //All function definitions
 
-function driverLogin(req, res){
+const driverLogin = (req, res) => {
 	db.query("SELECT driver_id, driver_name , driver_email, driver_phone, driver_car_number FROM driver WHERE driver_email= ?", req.body.email, function (err, data) {
 		if (err) {
 			res.send({
@@ -36,7 +36,7 @@ function driverLogin(req, res){
 	})
 }
 
-async function viewBookings(req, res){
+const viewBookings = async (req, res) => {
 	try {
 		let driverId = await driverService.getDriverId(req.driverEmail);
 		if (driverId == undefined) {
@@ -64,12 +64,12 @@ async function viewBookings(req, res){
 	}
 }
 
-async function driverLogout(req,res){
+const driverLogout = (req, res) => {
 	res.send({
 		statusCode: CONSTANTS.responseStatusCode.ACTION_COMPLETE,
 		message: "Logout successful",
-		data:{
-			driver_email:	req.driverEmail
+		data: {
+			driver_email: req.driverEmail
 		}
 	});
 }

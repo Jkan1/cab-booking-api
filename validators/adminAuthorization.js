@@ -7,12 +7,12 @@ const saltRounds = 10;
 const adminService = require('../services/adminService')
 
 //All function exports
-module.exports.generateHashFunction = generateHashFunction;
+module.exports.generateHash = generateHash;
 module.exports.hashToPasswordCheck = hashToPasswordCheck;
 
 //All function definitions
 
-function generateHashFunction(password){
+const generateHash = (password) => {
 	return new Promise((resolve, reject) => {
 		bcrypt.genSalt(saltRounds, (err, salt) => {
 			bcrypt.hash(password, salt, (err, hash) => {
@@ -28,7 +28,7 @@ function generateHashFunction(password){
 	})
 }
 
-async function hashToPasswordCheck(req, res, next){
+const hashToPasswordCheck = async (req, res, next) => {
 	let hash = await adminService.getHashValue(req.body.email)
 	if (hash == undefined) {
 		res.send({

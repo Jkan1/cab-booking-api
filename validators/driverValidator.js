@@ -22,9 +22,8 @@ const driverLoginSchema = {
 
 //Function definitions
 
-function signupInputValidation(req, res, next)
-{
-    Joi.validate(req.body, driverSignupSchema, function (err, value) {
+const signupInputValidation = (req, res, next) => {
+    Joi.validate(req.body, driverSignupSchema, (err, value) => {
         if (err) {
             res.json({
                 statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
@@ -38,8 +37,8 @@ function signupInputValidation(req, res, next)
     })
 }
 
-function loginInputValidation(req, res, next) {
-    Joi.validate(req.body, driverLoginSchema, function (err, value) {
+const loginInputValidation = (req, res, next) => {
+    Joi.validate(req.body, driverLoginSchema, (err, value) => {
         if (err) {
             res.json({
                 statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,

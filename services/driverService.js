@@ -7,7 +7,7 @@ module.exports.getDriverId = getDriverId;
 
 //All function definitioins
 
-function insertDriver(req, res){
+const insertDriver = (req, res) => {
 	db.query("INSERT INTO driver(driver_email, driver_name,driver_phone, driver_licence,driver_car_number ,password_hash) VALUES (?,?,?,?,?,?)", [req.body.email, req.body.name, req.body.phone, req.body.driverLicence, req.body.carNumber, req.hash], (err, detail) => {
 		if (err) {
 			res.send({
@@ -42,7 +42,7 @@ function insertDriver(req, res){
 	})
 }
 
-function getDriverHash(req, res){
+const getDriverHash = (req, res) => {
 	return new Promise(function (resolve, reject) {
 		db.query("SELECT password_hash FROM driver WHERE driver_email=?", req.body.email, function (err, data) {
 			if (err) {
@@ -55,7 +55,7 @@ function getDriverHash(req, res){
 	})
 }
 
-function getDriverId(email){
+const getDriverId = (email) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT driver_id FROM driver WHERE driver_email=?", email, (err, data) => {
 			if (err) {

@@ -21,23 +21,23 @@ module.exports.cancelBooking = cancelBooking;
 
 //All function definitions
 
-function checkExistingPendingBooking(customerID) {
+const checkExistingPendingBooking = (customerID) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT booking_id FROM booking WHERE customer_id=? AND (booking_status=0 OR booking_status=1) ", [customerID], function (err, data) {
-			if(err){
+			if (err) {
 				reject(err);
 			}
-			if(data[0]==undefined){
+			if (data[0] == undefined) {
 				resolve(-1)
 			}
-			else{
+			else {
 				resolve(data[0].booking_id);
 			}
 		});
 	})
 }
 
-function addSignup(req, res) {
+const addSignup = (req, res) => {
 	db.query("INSERT INTO customer( customer_name, customer_email, customer_phone, password_hash) VALUES (?,?,?,?)", [req.body.name, req.body.email, req.body.phone, req.hash], function (err, data) {
 		if (err) {
 			res.send({
@@ -62,7 +62,7 @@ function addSignup(req, res) {
 	})
 }
 
-function checkEmailExistance(req, res) {
+const checkEmailExistance = (req, res) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT password_hash FROM customer WHERE customer_email=?", req.body.email, function (err, val) {
 			if (err) {
@@ -75,7 +75,7 @@ function checkEmailExistance(req, res) {
 	})
 }
 
-function fetchLoginDetails(req, res) {
+const fetchLoginDetails = (req, res) => {
 	db.query("SELECT customer_id,customer_name ,customer_email, customer_phone FROM customer WHERE customer_email=?", req.body.email, function (err, detail) {
 		if (err) {
 			res.send({
@@ -100,7 +100,7 @@ function fetchLoginDetails(req, res) {
 	})
 }
 
-function getEmailByToken(req, res) {
+const getEmailByToken = (req, res) => {
 	return new Promise(function (resolve, reject) {
 		jwt.verify(req.body.token, CONFIG.privateKey, (err, value) => {
 			if (err) {
@@ -113,7 +113,7 @@ function getEmailByToken(req, res) {
 	})
 }
 
-function insertBookingDetails(req, res) {
+const insertBookingDetails = (req, res) => {
 	return new Promise(function (resolve, reject) {
 		db.query("SELECT customer_id FROM customer WHERE customer_email=?", req.tokenEmail, function (err, data) {
 			if (err) {
@@ -135,7 +135,7 @@ function insertBookingDetails(req, res) {
 	})
 }
 
-function getBookingDetail(customerID) {
+const getBookingDetail = (customerID) => {
 	return new Promise(function (resolve, reject) {
 		db.query("SELECT booking_id, customer_id, source_address, destination_address,created_at FROM booking WHERE customer_id=? AND booking_status=0", customerID, function (err, result) {
 			if (err) {
@@ -148,7 +148,7 @@ function getBookingDetail(customerID) {
 	})
 }
 
-function getcustomerDetailsByEmail(email) {
+const getcustomerDetailsByEmail = (email) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT customer_id, customer_name ,customer_email FROM customer WHERE customer_email= ? ", email, (err, data) => {
 			if (err) {
@@ -161,7 +161,7 @@ function getcustomerDetailsByEmail(email) {
 	})
 }
 
-function updateBookingTable(bookingID, driverRating) {
+const updateBookingTable = (bookingID, driverRating) => {
 	return new Promise((resolve, reject) => {
 		db.query("UPDATE booking SET booking_status = ?,driver_rating=?, completed_at=? WHERE booking_id=?", [2, driverRating, new Date().toJSON().slice(0, 19).replace('T', ' '), bookingID], (err, detail) => {
 			if (err) {
@@ -174,7 +174,7 @@ function updateBookingTable(bookingID, driverRating) {
 	})
 }
 
-function fetchDriverStatus(bookingID) {
+const fetchDriverStatus = (bookingID) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT driver_id,booking_fare from booking WHERE booking_id=?", [bookingID], (err, data) => {
 			if (err) {
@@ -188,7 +188,7 @@ function fetchDriverStatus(bookingID) {
 }
 
 
-function checkAvailableBooking(customerID) {
+const checkAvailableBooking = (customerID) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT booking_id FROM booking WHERE customer_id=? AND booking_status=?", [customerID, 1], (err, data) => {
 			if (err) {
@@ -203,7 +203,7 @@ function checkAvailableBooking(customerID) {
 
 
 
-function setStatusOfDriver(driver) {
+const setStatusOfDriver = (driver) => {
 	return new Promise((resolve, reject) => {
 		db.query("UPDATE driver SET driver_status=? WHERE driver_id=? AND driver_status = ?", [0, driver.driver_id, 1], (err, data) => {
 			if (err) {
@@ -216,7 +216,7 @@ function setStatusOfDriver(driver) {
 	})
 }
 
-function getcustomerID(email) {
+const getcustomerID = (email) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT customer_id FROM customer WHERE customer_email=?", email, (err, data) => {
 			if (err) {
@@ -229,7 +229,7 @@ function getcustomerID(email) {
 	})
 }
 
-function getcustomerBookingDetails(customerID) {
+const getcustomerBookingDetails = (customerID) => {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT customer.customer_id, customer.customer_email, customer.customer_phone, booking.booking_id, booking.created_at, booking.driver_id, booking.booking_fare, booking.source_address, booking.destination_address FROM customer INNER JOIN booking on customer.customer_id= booking.customer_id WHERE customer.customer_id=? AND booking.booking_status=2", customerID, (err, detail) => {
 			if (err) {
@@ -242,23 +242,23 @@ function getcustomerBookingDetails(customerID) {
 	});
 }
 
-function cancelBooking(bookingID){
-	return new Promise((resolve, reject)=>{
-		db.query("UPDATE booking SET booking_status=3 WHERE booking_id=?",bookingID,(err,data)=>{
-			if(err){
+const cancelBooking = (bookingID) => {
+	return new Promise((resolve, reject) => {
+		db.query("UPDATE booking SET booking_status=3 WHERE booking_id=?", bookingID, (err, data) => {
+			if (err) {
 				reject(err)
 			}
-			if(data.affectedRows <1){
+			if (data.affectedRows < 1) {
 				resolve(false);
 			}
-			else{
+			else {
 				resolve(true);
 			}
 		})
 	});
 }
 
-function addRatingsOnDriver(req, res, driverID) {
+const addRatingsOnDriver = (req, res, driverID) => {
 	return new Promise((resolve, reject) => {
 		db.query("UPDATE driver SET driver_rating =? WHERE driver_id=?", [req.body.driverRating, driverID], (err, details) => {
 			if (err) {

@@ -10,7 +10,7 @@ module.exports.cancelBooking = cancelBooking;
 
 //All function definitions
 
-async function createBooking(req, res) {
+const createBooking = async (req, res) => {
 	try {
 		req.sourceLatLong = await mapUtil.getLatLong(req.body.source);
 		req.destinationLatLong = await mapUtil.getLatLong(req.body.destination);
@@ -41,11 +41,11 @@ async function createBooking(req, res) {
 				});
 			}
 		}
-		else{
+		else {
 			res.send({
 				statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
 				error: "booking not created because pending booking exists",
-				message: "Booking already pending with Booking ID "+checkExistingPendingBooking
+				message: "Booking already pending with Booking ID " + checkExistingPendingBooking
 			});
 		}
 
@@ -68,7 +68,7 @@ async function createBooking(req, res) {
 }
 
 
-async function completeBooking(req, res) {
+const completeBooking = async (req, res) => {
 	try {
 		let tokenEmail = req.tokenEmail;
 		let getcustomerDetailsByEmail = await customerService.getcustomerDetailsByEmail(tokenEmail);
@@ -141,7 +141,7 @@ async function completeBooking(req, res) {
 	}
 }
 
-async function viewBooking(req, res) {
+const viewBooking = async (req, res) => {
 	try {
 		let email = req.tokenEmail;
 		let customerID = await customerService.getcustomerID(email);
@@ -160,31 +160,31 @@ async function viewBooking(req, res) {
 	}
 }
 
-async function cancelBooking(req,res){
-	try{
+const cancelBooking = async (req, res) => {
+	try {
 		const cancelBooking = await customerService.cancelBooking(req.body.bookingID);
-		if(cancelBooking === false){
+		if (cancelBooking === false) {
 			res.send({
 				statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
-				error:	"Unable to update booking status (cancel)",
+				error: "Unable to update booking status (cancel)",
 				message: "Unable to cancel booking"
 			});
-		}else if(cancelBooking === true){
+		} else if (cancelBooking === true) {
 			res.send({
 				statusCode: CONSTANTS.responseStatusCode.ACTION_COMPLETE,
-				message: "Booking with Booking ID "+req.body.bookingID+" cancelled succesfully"
+				message: "Booking with Booking ID " + req.body.bookingID + " cancelled succesfully"
 			});
 		}
-	}catch(err){
+	} catch (err) {
 		res.send({
 			statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
-			error:	err.message,
+			error: err.message,
 			message: "Unable to cancel booking"
 		});
 	}
 }
 
-async function customerLogout(req, res) {
+const customerLogout = (req, res) => {
 	//DELETE TOKEN SAVED IN SESSION 
 	res.send({
 		statusCode: CONSTANTS.responseStatusCode.ACTION_COMPLETE,

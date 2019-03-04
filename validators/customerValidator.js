@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 //All function exports
 module.exports.signupInputValidate = signupInputValidate;
-module.exports.loginInputValidate =loginInputValidate;
+module.exports.loginInputValidate = loginInputValidate;
 module.exports.customerRatingsValidate = customerRatingsValidate;
 
 //Schema declarations
@@ -21,12 +21,12 @@ const customerLoginSchema = {
 
 const customerRatingsSchema = {
 	token: Joi.required(),
-	driverRating : Joi.number().min(1).max(5).required()
+	driverRating: Joi.number().min(1).max(5).required()
 }
 
 //All function definitions
 
-function signupInputValidate(req, res, next) {
+const signupInputValidate = (req, res, next) => {
 	Joi.validate(req.body, customerSignupSchema, (err, val) => {
 		if (err) {
 			res.json({
@@ -41,7 +41,7 @@ function signupInputValidate(req, res, next) {
 	})
 }
 
-function	loginInputValidate(req, res, next) {
+const loginInputValidate = (req, res, next) => {
 	Joi.validate(req.body, customerLoginSchema, (err, val) => {
 		if (err) {
 			res.json({
@@ -56,7 +56,7 @@ function	loginInputValidate(req, res, next) {
 	})
 }
 
-function customerRatingsValidate(req, res, next) {
+const customerRatingsValidate = (req, res, next) => {
 	Joi.validate(req.body, customerRatingsSchema, (err, val) => {
 		if (err) {
 			res.json({
