@@ -3,6 +3,7 @@ const Joi = require('joi');
 //All function exports
 module.exports.signupInputValidate = signupInputValidate;
 module.exports.loginInputValidate =loginInputValidate;
+module.exports.customerRatingsValidate = customerRatingsValidate;
 
 //Schema declarations
 const customerSignupSchema = {
@@ -16,6 +17,11 @@ const customerSignupSchema = {
 const customerLoginSchema = {
 	email: Joi.string().email().required(),
 	password: Joi.string().min(6).max(30).required(),
+}
+
+const customerRatingsSchema = {
+	token: Joi.required(),
+	driverRating : Joi.number().min(1).max(5).required()
 }
 
 //All function definitions
@@ -41,6 +47,21 @@ function	loginInputValidate(req, res, next) {
 			res.json({
 				statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
 				error: err.message,
+				message: "Invalid input"
+			});
+		}
+		else {
+			next();
+		}
+	})
+}
+
+function customerRatingsValidate(req, res, next) {
+	Joi.validate(req.body, customerRatingsSchema, (err, val) => {
+		if (err) {
+			res.json({
+				statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
+				error: err.details[0].message,
 				message: "Invalid input"
 			});
 		}

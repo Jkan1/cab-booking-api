@@ -157,6 +157,38 @@
                 "security": {}
             }
         },
+        "/customer/cancel-booking": {
+            "post": {
+                "tags": [
+                    "customers"
+                ],
+                "summary": "Cancel pending booking.",
+                "description": "",
+                "operationId": "cancelBooking",
+                "consumes": "application/json",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "token",
+                        "description": "Enter customer token.",
+                        "required": true
+                    },
+                    {
+                        "in": "formData",
+                        "name": "bookingID",
+                        "description": "Enter pending booking ID.",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "security": {}
+            }
+        },
         "/customer/booking-complete": {
             "post": {
                 "tags": [
@@ -164,7 +196,7 @@
                 ],
                 "summary": "Complete pending booking.",
                 "description": "",
-                "operationId": "bComplete",
+                "operationId": "bookingComplete",
                 "consumes": "application/json",
                 "produces": "application/json",
                 "parameters": [

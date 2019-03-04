@@ -22,6 +22,19 @@ const customerRouter = require('./routers/customerRouter');
 const adminRouter = require('./routers/adminRouter');
 const driverRouter = require('./routers/driverRouter');
 
+/*
+ *
+ *	BOOKING STATUS ->  	0 : PENDING, 
+												1 : DRIVER_ASSIGNED, 
+												2 : COMPLETED, 
+												3	:	CANCELLED 
+ 											
+ *	DRIVER STATUS  ->  	0 : FREE, 
+												1 : ASSIGNED, 
+												2 : NOT_AVAILABLE
+ *
+*/
+
 //Router middlewares
 app.use('/customer', customerRouter);
 app.use('/admin', adminRouter);

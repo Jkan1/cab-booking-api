@@ -12,5 +12,6 @@ router.post('/signup', customerValidator.signupInputValidate, customerAuthorizat
 router.post('/login', customerValidator.loginInputValidate, customerAuthorization.checkCredentials, customerAuthorization.generateToken, customerService.fetchLoginDetails);
 router.post('/create-booking', customerAuthorization.validateToken, customerController.createBooking);
 router.post('/view-bookings', customerAuthorization.validateToken, customerController.viewBooking);
-router.post('/booking-complete', customerAuthorization.validateToken, customerController.completeBooking);
-router.post('/logout',customerAuthorization.validateToken, customerController.customerLogout)
+router.post('/cancel-booking',customerAuthorization.validateToken,customerController.cancelBooking);
+router.post('/booking-complete',customerValidator.customerRatingsValidate, customerAuthorization.validateToken, customerController.completeBooking);
+router.post('/logout',customerAuthorization.validateToken, customerController.customerLogout);

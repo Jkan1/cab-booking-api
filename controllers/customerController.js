@@ -6,7 +6,7 @@ module.exports.createBooking = createBooking;
 module.exports.completeBooking = completeBooking;
 module.exports.viewBooking = viewBooking;
 module.exports.customerLogout = customerLogout;
-
+module.exports.cancelBooking = cancelBooking;
 
 //All function definitions
 
@@ -14,30 +14,41 @@ async function createBooking(req, res) {
 	try {
 		req.sourceLatLong = await mapUtil.getLatLong(req.body.source);
 		req.destinationLatLong = await mapUtil.getLatLong(req.body.destination);
-		const insert = await customerService.insertBookingDetails(req, res);
 		const customerID = await customerService.getcustomerID(req.tokenEmail)
-		const getBookingDetail = await customerService.getBookingDetail(customerID);
-		if (insert.affectedRows < 1) {
+
+		const checkExistingPendingBooking = await customerService.checkExistingPendingBooking(customerID)
+		if (checkExistingPendingBooking < 0) {
+			const insert = await customerService.insertBookingDetails(req, res);
+			const getBookingDetail = await customerService.getBookingDetail(customerID);
+			if (insert.affectedRows < 1) {
+				res.send({
+					statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
+					error: "not inserted",
+					message: "Some error occurred"
+				});
+			}
+			else {
+				res.send({
+					statusCode: 200,
+					message: "Booking successfully created",
+					data: {
+						"customer_id": req.customerID,
+						"booking_id ": getBookingDetail[0].booking_id,
+						"source ": getBookingDetail[0].source_address,
+						"destination ": getBookingDetail[0].destination_address,
+						"message": "Please wait while driver is assigned"
+					}
+				});
+			}
+		}
+		else{
 			res.send({
 				statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
-				error: "not inserted",
-				message: "Some error occurred"
+				error: "booking not created because pending booking exists",
+				message: "Booking already pending with Booking ID "+checkExistingPendingBooking
 			});
 		}
-		else {
-			res.send({
-				statusCode: 200,
-				message: "Booking successfully created",
-				data: {
-					"customer_id": req.customerID,
-					"booking_id ": getBookingDetail[0].booking_id,
-					"source ": getBookingDetail[0].source_address,
-					"destination ": getBookingDetail[0].destination_address,
-					"message": "Please wait while driver is assigned"
-				}
-			});
 
-		}
 	} catch (err) {
 		if (err == 'NOT FOUND') {
 			res.send({
@@ -149,13 +160,37 @@ async function viewBooking(req, res) {
 	}
 }
 
+async function cancelBooking(req,res){
+	try{
+		const cancelBooking = await customerService.cancelBooking(req.body.bookingID);
+		if(cancelBooking === false){
+			res.send({
+				statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
+				error:	"Unable to update booking status (cancel)",
+				message: "Unable to cancel booking"
+			});
+		}else if(cancelBooking === true){
+			res.send({
+				statusCode: CONSTANTS.responseStatusCode.ACTION_COMPLETE,
+				message: "Booking with Booking ID "+req.body.bookingID+" cancelled succesfully"
+			});
+		}
+	}catch(err){
+		res.send({
+			statusCode: CONSTANTS.responseStatusCode.SHOW_ERROR_MESSAGE,
+			error:	err.message,
+			message: "Unable to cancel booking"
+		});
+	}
+}
+
 async function customerLogout(req, res) {
 	//DELETE TOKEN SAVED IN SESSION 
 	res.send({
 		statusCode: CONSTANTS.responseStatusCode.ACTION_COMPLETE,
 		message: "Logout succesfull",
-		data	: {
-			customer_email	: req.tokenEmail
+		data: {
+			customer_email: req.tokenEmail
 		}
 	});
 }

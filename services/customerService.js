@@ -16,8 +16,26 @@ module.exports.getcustomerID = getcustomerID;
 module.exports.getcustomerBookingDetails = getcustomerBookingDetails;
 module.exports.addRatingsOnDriver = addRatingsOnDriver;
 module.exports.checkAvailableBooking = checkAvailableBooking;
+module.exports.checkExistingPendingBooking = checkExistingPendingBooking;
+module.exports.cancelBooking = cancelBooking;
 
 //All function definitions
+
+function checkExistingPendingBooking(customerID) {
+	return new Promise((resolve, reject) => {
+		db.query("SELECT booking_id FROM booking WHERE customer_id=? AND (booking_status=0 OR booking_status=1) ", [customerID], function (err, data) {
+			if(err){
+				reject(err);
+			}
+			if(data[0]==undefined){
+				resolve(-1)
+			}
+			else{
+				resolve(data[0].booking_id);
+			}
+		});
+	})
+}
 
 function addSignup(req, res) {
 	db.query("INSERT INTO customer( customer_name, customer_email, customer_phone, password_hash) VALUES (?,?,?,?)", [req.body.name, req.body.email, req.body.phone, req.hash], function (err, data) {
@@ -143,9 +161,9 @@ function getcustomerDetailsByEmail(email) {
 	})
 }
 
-function updateBookingTable(bookingID,driverRating) {
+function updateBookingTable(bookingID, driverRating) {
 	return new Promise((resolve, reject) => {
-		db.query("UPDATE booking SET booking_status = ?,driver_rating=?, completed_at=? WHERE booking_id=?", [2,driverRating, new Date().toJSON().slice(0, 19).replace('T', ' '), bookingID], (err, detail) => {
+		db.query("UPDATE booking SET booking_status = ?,driver_rating=?, completed_at=? WHERE booking_id=?", [2, driverRating, new Date().toJSON().slice(0, 19).replace('T', ' '), bookingID], (err, detail) => {
 			if (err) {
 				reject(err)
 			}
@@ -215,13 +233,29 @@ function getcustomerBookingDetails(customerID) {
 	return new Promise((resolve, reject) => {
 		db.query("SELECT customer.customer_id, customer.customer_email, customer.customer_phone, booking.booking_id, booking.created_at, booking.driver_id, booking.booking_fare, booking.source_address, booking.destination_address FROM customer INNER JOIN booking on customer.customer_id= booking.customer_id WHERE customer.customer_id=? AND booking.booking_status=2", customerID, (err, detail) => {
 			if (err) {
-				reject(err)
+				reject(err);
 			}
 			else {
-				resolve(detail)
+				resolve(detail);
 			}
 		})
-	})
+	});
+}
+
+function cancelBooking(bookingID){
+	return new Promise((resolve, reject)=>{
+		db.query("UPDATE booking SET booking_status=3 WHERE booking_id=?",bookingID,(err,data)=>{
+			if(err){
+				reject(err)
+			}
+			if(data.affectedRows <1){
+				resolve(false);
+			}
+			else{
+				resolve(true);
+			}
+		})
+	});
 }
 
 function addRatingsOnDriver(req, res, driverID) {
