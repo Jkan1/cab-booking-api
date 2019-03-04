@@ -6,10 +6,6 @@ const saltRounds = 10;
 //Require custom module
 const adminService = require('../services/adminService')
 
-//All function exports
-module.exports.generateHash = generateHash;
-module.exports.hashToPasswordCheck = hashToPasswordCheck;
-
 //All function definitions
 
 const generateHash = (password) => {
@@ -24,7 +20,6 @@ const generateHash = (password) => {
 				}
 			});
 		});
-
 	})
 }
 
@@ -62,3 +57,6 @@ const hashToPasswordCheck = async (req, res, next) => {
 	}
 }
 
+//All function exports
+module.exports.generateHash = generateHash;
+module.exports.hashToPasswordCheck = hashToPasswordCheck;

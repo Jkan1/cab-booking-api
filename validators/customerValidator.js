@@ -1,10 +1,5 @@
 const Joi = require('joi');
 
-//All function exports
-module.exports.signupInputValidate = signupInputValidate;
-module.exports.loginInputValidate = loginInputValidate;
-module.exports.customerRatingsValidate = customerRatingsValidate;
-
 //Schema declarations
 const customerSignupSchema = {
 	name: Joi.string().min(3).max(30).required(),
@@ -70,3 +65,8 @@ const customerRatingsValidate = (req, res, next) => {
 		}
 	})
 }
+
+//All function exports
+module.exports.signupInputValidate = signupInputValidate;
+module.exports.loginInputValidate = loginInputValidate;
+module.exports.customerRatingsValidate = customerRatingsValidate;

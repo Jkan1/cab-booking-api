@@ -6,10 +6,10 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 //Global modules
-global.Promise = require('bluebird');
-global.connection = require('./database/mysqlLib');
 global.CONSTANTS = require('./constants/constants');
 global.CONFIG = require('./config/config');
+global.Promise = require('bluebird');
+global.connection = require('./database/mysqlLib');
 
 //Application miiddlewares
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

@@ -1,13 +1,6 @@
 const mapUtil = require('../utilities/googleMapUtility');
 const customerService = require('../services/customerService')
 
-//All function exports
-module.exports.createBooking = createBooking;
-module.exports.completeBooking = completeBooking;
-module.exports.viewBooking = viewBooking;
-module.exports.customerLogout = customerLogout;
-module.exports.cancelBooking = cancelBooking;
-
 //All function definitions
 
 const createBooking = async (req, res) => {
@@ -194,3 +187,10 @@ const customerLogout = (req, res) => {
 		}
 	});
 }
+
+//All function exports
+module.exports.createBooking = createBooking;
+module.exports.completeBooking = completeBooking;
+module.exports.viewBooking = viewBooking;
+module.exports.customerLogout = customerLogout;
+module.exports.cancelBooking = cancelBooking;

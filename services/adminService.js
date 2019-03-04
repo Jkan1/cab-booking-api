@@ -2,19 +2,6 @@ const db = require('../database/mysqlLib')
 const Promise = require('bluebird');
 const adminAuthorization = require('../validators/adminAuthorization')
 
-//All function exports
-module.exports.closeConnection = closeConnection;
-module.exports.checkDatabaseEmpty = checkDatabaseEmpty;
-module.exports.insertIntoDatabase = insertIntoDatabase;
-module.exports.getHashValue = getHashValue;
-module.exports.fetchAdminDetails = fetchAdminDetails;
-module.exports.fetchFreeDriversByRatings = fetchFreeDriversByRatings;
-module.exports.fetchPendingBookings = fetchPendingBookings;
-module.exports.getAvailableDriverCheck = getAvailableDriverCheck;
-module.exports.assignDriver = assignDriver;
-module.exports.updateDriverStatus = updateDriverStatus;
-module.exports.allBookingDetail = allBookingDetail;
-
 //All function definitions
 
 const closeConnection = () => {
@@ -174,3 +161,16 @@ const allBookingDetail = (bookingID) => {
 		})
 	})
 }
+
+//All function exports
+module.exports.closeConnection = closeConnection;
+module.exports.checkDatabaseEmpty = checkDatabaseEmpty;
+module.exports.insertIntoDatabase = insertIntoDatabase;
+module.exports.getHashValue = getHashValue;
+module.exports.fetchAdminDetails = fetchAdminDetails;
+module.exports.fetchFreeDriversByRatings = fetchFreeDriversByRatings;
+module.exports.fetchPendingBookings = fetchPendingBookings;
+module.exports.getAvailableDriverCheck = getAvailableDriverCheck;
+module.exports.assignDriver = assignDriver;
+module.exports.updateDriverStatus = updateDriverStatus;
+module.exports.allBookingDetail = allBookingDetail;

@@ -1,9 +1,5 @@
 const Joi = require('joi')
 
-//Function exports
-module.exports.signupInputValidation = signupInputValidation
-module.exports.loginInputValidation = loginInputValidation;
-
 //Schema declarations
 
 const driverSignupSchema = {
@@ -51,3 +47,7 @@ const loginInputValidation = (req, res, next) => {
         }
     })
 }
+
+//Function exports
+module.exports.signupInputValidation = signupInputValidation
+module.exports.loginInputValidation = loginInputValidation;

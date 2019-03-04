@@ -2,11 +2,6 @@ const db = require('../database/mysqlLib')
 const driverService = require('../services/driverService')
 const mongoLogs = require('../logs/logging')
 
-//All function exports
-module.exports.driverLogin = driverLogin;
-module.exports.viewBookings = viewBookings;
-module.exports.driverLogout = driverLogout;
-
 //All function definitions
 
 const driverLogin = (req, res) => {
@@ -73,3 +68,8 @@ const driverLogout = (req, res) => {
 		}
 	});
 }
+
+//All function exports
+module.exports.driverLogin = driverLogin;
+module.exports.viewBookings = viewBookings;
+module.exports.driverLogout = driverLogout;

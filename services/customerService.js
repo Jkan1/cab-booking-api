@@ -1,24 +1,6 @@
 const db = require('../database/mysqlLib')
 const jwt = require('jsonwebtoken')
 
-//All function exports
-module.exports.addSignup = addSignup;
-module.exports.checkEmailExistance = checkEmailExistance;
-module.exports.fetchLoginDetails = fetchLoginDetails;
-module.exports.getEmailByToken = getEmailByToken;
-module.exports.insertBookingDetails = insertBookingDetails;
-module.exports.getBookingDetail = getBookingDetail;
-module.exports.getcustomerDetailsByEmail = getcustomerDetailsByEmail;
-module.exports.updateBookingTable = updateBookingTable;
-module.exports.fetchDriverStatus = fetchDriverStatus;
-module.exports.setStatusOfDriver = setStatusOfDriver;
-module.exports.getcustomerID = getcustomerID;
-module.exports.getcustomerBookingDetails = getcustomerBookingDetails;
-module.exports.addRatingsOnDriver = addRatingsOnDriver;
-module.exports.checkAvailableBooking = checkAvailableBooking;
-module.exports.checkExistingPendingBooking = checkExistingPendingBooking;
-module.exports.cancelBooking = cancelBooking;
-
 //All function definitions
 
 const checkExistingPendingBooking = (customerID) => {
@@ -270,3 +252,21 @@ const addRatingsOnDriver = (req, res, driverID) => {
 		});
 	});
 }
+
+//All function exports
+module.exports.addSignup = addSignup;
+module.exports.checkEmailExistance = checkEmailExistance;
+module.exports.fetchLoginDetails = fetchLoginDetails;
+module.exports.getEmailByToken = getEmailByToken;
+module.exports.insertBookingDetails = insertBookingDetails;
+module.exports.getBookingDetail = getBookingDetail;
+module.exports.getcustomerDetailsByEmail = getcustomerDetailsByEmail;
+module.exports.updateBookingTable = updateBookingTable;
+module.exports.fetchDriverStatus = fetchDriverStatus;
+module.exports.setStatusOfDriver = setStatusOfDriver;
+module.exports.getcustomerID = getcustomerID;
+module.exports.getcustomerBookingDetails = getcustomerBookingDetails;
+module.exports.addRatingsOnDriver = addRatingsOnDriver;
+module.exports.checkAvailableBooking = checkAvailableBooking;
+module.exports.checkExistingPendingBooking = checkExistingPendingBooking;
+module.exports.cancelBooking = cancelBooking;

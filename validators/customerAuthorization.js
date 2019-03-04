@@ -3,12 +3,6 @@ const saltRounds = 10;
 const customerService = require('../services/customerService')
 const jwt = require('jsonwebtoken');
 
-//All function exports
-module.exports.checkCredentials = checkCredentials;
-module.exports.passwordToHash = passwordToHash;
-module.exports.generateToken = generateToken;
-module.exports.validateToken = validateToken;
-
 //All function definitions
 
 const checkCredentials = async (req, res, next) => {
@@ -96,3 +90,9 @@ const validateToken = async (req, res, next) => {
 		next();
 	}
 }
+
+//All function exports
+module.exports.checkCredentials = checkCredentials;
+module.exports.passwordToHash = passwordToHash;
+module.exports.generateToken = generateToken;
+module.exports.validateToken = validateToken;

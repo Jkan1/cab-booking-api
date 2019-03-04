@@ -3,13 +3,6 @@ const saltRounds = 10;
 const driverService = require('../services/driverService')
 const jwt = require('jsonwebtoken')
 
-//All function exports
-module.exports.passwordToHash = passwordToHash;
-module.exports.checkLoginCredential = checkLoginCredential
-module.exports.hashToPassword = hashToPassword
-module.exports.generateToken = generateToken
-module.exports.validateToken = validateToken
-
 //All function definitions
 
 const passwordToHash = (req, res, next) => {
@@ -123,3 +116,11 @@ const validateToken = async (req, res, next) => {
 		});
 	}
 }
+
+
+//All function exports
+module.exports.passwordToHash = passwordToHash;
+module.exports.checkLoginCredential = checkLoginCredential
+module.exports.hashToPassword = hashToPassword
+module.exports.generateToken = generateToken
+module.exports.validateToken = validateToken

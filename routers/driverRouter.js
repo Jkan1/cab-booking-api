@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const router = express.Router();
 const driverService= require('../services/driverService')
 const driverController = require ('../controllers/driverController');

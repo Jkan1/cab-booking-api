@@ -12,9 +12,6 @@ var options = {
 
 var appGeocoder = NodeGeocoder(options);
 
-//Function export
-module.exports.getLatLong = getLatLong;
-
 //Function definition
 const getLatLong = (address) => {
   return new Promise((resolve, reject) => {
@@ -31,6 +28,10 @@ const getLatLong = (address) => {
     });
   });
 }
+
+
+//Function export
+module.exports.getLatLong = getLatLong;
 
 // var distance = require('google-distance');
 // distance.apiKey = 'AIzaSyC7A0EVetIX5j4PEobIlo3KF1MGDHdsKzE';

@@ -1,14 +1,6 @@
 const adminService = require('../services/adminService')
 const Logging = require('../logs/logging')
 
-//All function exports
-module.exports.viewFreeDrivers = viewFreeDrivers;
-module.exports.viewPendingBookings = viewPendingBookings;
-module.exports.assignDriver = assignDriver;
-module.exports.adminLoginDetails = adminLoginDetails;
-module.exports.closeDbConnection = closeDbConnection;
-module.exports.adminLogout = adminLogout;
-
 //All function definitions
 const closeDbConnection = (req, res) => {
 	Promise.coroutine(function* () {
@@ -161,3 +153,11 @@ const adminLogout = (req, res) => {
 		message: 'Logout succesfull'
 	});
 }
+
+//All function exports
+module.exports.viewFreeDrivers = viewFreeDrivers;
+module.exports.viewPendingBookings = viewPendingBookings;
+module.exports.assignDriver = assignDriver;
+module.exports.adminLoginDetails = adminLoginDetails;
+module.exports.closeDbConnection = closeDbConnection;
+module.exports.adminLogout = adminLogout;

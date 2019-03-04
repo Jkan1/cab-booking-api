@@ -1,10 +1,5 @@
 const db = require('../database/mysqlLib')
 
-//All function exports
-module.exports.insertDriver = insertDriver;
-module.exports.getDriverHash = getDriverHash;
-module.exports.getDriverId = getDriverId;
-
 //All function definitioins
 
 const insertDriver = (req, res) => {
@@ -68,3 +63,7 @@ const getDriverId = (email) => {
 	})
 }
 
+//All function exports
+module.exports.insertDriver = insertDriver;
+module.exports.getDriverHash = getDriverHash;
+module.exports.getDriverId = getDriverId;

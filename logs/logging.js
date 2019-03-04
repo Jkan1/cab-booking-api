@@ -1,10 +1,5 @@
 const Promise = require('bluebird');
-const config = require('../config/config')
 const mongo = require('../database/mongoLib')
-
-//Export all functions
-module.exports.createBookingLog = createBookingLog;
-module.exports.printBookingsOfDriver = printBookingsOfDriver;
 
 //All function definitions
 
@@ -46,3 +41,7 @@ function printBookingsOfDriver(driverID){
 		})
 	})
 }
+
+//Export all functions
+module.exports.createBookingLog = createBookingLog;
+module.exports.printBookingsOfDriver = printBookingsOfDriver;
