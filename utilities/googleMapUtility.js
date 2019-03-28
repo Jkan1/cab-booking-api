@@ -6,7 +6,7 @@ var options = {
   provider: 'google',
   // Optional depending on the providers
   httpAdapter: 'https', // Default
-  apiKey: 'AIzaSyC7A0EVetIX5j4PEobIlo3KF1MGDHdsKzE', // for Google API
+  apiKey: '********************************', // for Google API
   formatter: null         //  string'
 };
 
