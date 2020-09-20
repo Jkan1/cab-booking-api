@@ -8,8 +8,8 @@
     "mysqlCred": {
         "HOST": "localhost",
         "USER": "root",
-        "PASSWORD": "password",
-        "DATABASE": "db-cab-booking-api"
+        "PASSWORD": "root",
+        "DATABASE": "CAB_BOOKING_API"
     },
     "mongoCred": {
         "DB": "db-cab-booking-api",

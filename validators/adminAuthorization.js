@@ -1,6 +1,6 @@
 //Require npm modules
 const Promise = require('bluebird')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const saltRounds = 10;
 
 //Require custom module

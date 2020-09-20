@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const saltRounds = 10;
 const customerService = require('../services/customerService')
 const jwt = require('jsonwebtoken');
