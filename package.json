@@ -1,7 +1,7 @@
 {
-  "name": "cab",
+  "name": "cab-booking-api",
   "version": "1.0.0",
-  "description": "This project is for cab booking with user, Driver and Admin Interface",
+  "description": "A collection of APIs for cab booking system.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

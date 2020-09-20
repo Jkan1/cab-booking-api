@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is server Assignment ...",
+        "description": "A collection of APIs for cab booking system.",
         "version": "1.0.0",
-        "title": "Assignment",
+        "title": "Cab Booking API",
         "host": "localhost:8080",
         "basePath": "/",
         "schemes": [

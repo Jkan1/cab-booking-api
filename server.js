@@ -22,19 +22,6 @@ const customerRouter = require('./routers/customerRouter');
 const adminRouter = require('./routers/adminRouter');
 const driverRouter = require('./routers/driverRouter');
 
-/*
- *
- *	BOOKING STATUS ->  	0 : PENDING, 
-												1 : DRIVER_ASSIGNED, 
-												2 : COMPLETED, 
-												3	:	CANCELLED 
- 											
- *	DRIVER STATUS  ->  	0 : FREE, 
-												1 : ASSIGNED, 
-												2 : NOT_AVAILABLE
- *
-*/
-
 //Router middlewares
 app.use('/customer', customerRouter);
 app.use('/admin', adminRouter);
@@ -46,11 +33,11 @@ app.listen(CONFIG.PORT, function (err) {
 	}
 	else {
 		Promise.coroutine(function* () {
-			const check = yield adminService.checkDatabaseEmpty()
+			const check = yield adminService.checkDatabaseEmpty();
 			if (check[0] == undefined) {
-				let result = yield adminService.insertIntoDatabase()
+				let result = yield adminService.insertIntoDatabase();
 			}
-			console.log("Server listening at Port : " + CONFIG.PORT)
+			console.log("Server listening at Port : " + CONFIG.PORT);
 		})().catch((err) => {
 			console.log(err);
 		})
