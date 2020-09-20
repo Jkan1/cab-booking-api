@@ -16,6 +16,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+	console.log("API " + req.method + req.url);
+	next();
+});
+
 //Require modules
 const adminService = require('./services/adminService');
 const customerRouter = require('./routers/customerRouter');
