@@ -10,15 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "bluebird": "^3.5.3",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
+    "bluebird": "^3.7.2",
+    "express": "^4.17.1",
     "google-distance": "^1.0.1",
-    "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.0",
-    "mongodb": "^3.1.13",
-    "mysql": "^2.16.0",
+    "joi": "^17.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.2",
+    "mysql": "^2.18.1",
     "node-geocoder": "^3.27.0",
-    "swagger-ui-express": "^4.0.2"
+    "swagger-ui-express": "^4.1.4"
   }
 }

@@ -17,7 +17,7 @@ const checkCredentials = async (req, res, next) => {
 			})
 		}
 		else {
-			bcrypt.compare(password, passwordHash[0].password_hash, function (err, check) {
+			bcrypt.compare(password, passwordHash[0].password, function (err, check) {
 				if (check) {
 					next();
 				}

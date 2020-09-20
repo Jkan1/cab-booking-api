@@ -3,7 +3,7 @@ const db = require('../database/mysqlLib')
 //All function definitioins
 
 const insertDriver = (req, res) => {
-	db.query("INSERT INTO driver(driver_email, driver_name,driver_phone, driver_licence,driver_car_number ,password_hash) VALUES (?,?,?,?,?,?)", [req.body.email, req.body.name, req.body.phone, req.body.driverLicence, req.body.carNumber, req.hash], (err, detail) => {
+	db.query("INSERT INTO driver(driver_email, driver_name,driver_phone, driver_licence,driver_car_number ,password) VALUES (?,?,?,?,?,?)", [req.body.email, req.body.name, req.body.phone, req.body.driverLicence, req.body.carNumber, req.hash], (err, detail) => {
 		if (err) {
 			res.send({
 				statusCode: CONSTANTS.responseStatusCode.SERVER_ERROR,
@@ -39,7 +39,7 @@ const insertDriver = (req, res) => {
 
 const getDriverHash = (req, res) => {
 	return new Promise(function (resolve, reject) {
-		db.query("SELECT password_hash FROM driver WHERE driver_email=?", req.body.email, function (err, data) {
+		db.query("SELECT password FROM driver WHERE driver_email=?", req.body.email, function (err, data) {
 			if (err) {
 				reject('err')
 			}

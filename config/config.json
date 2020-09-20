@@ -9,10 +9,10 @@
         "HOST": "localhost",
         "USER": "root",
         "PASSWORD": "root",
-        "DATABASE": "CAB_BOOKING_API"
+        "DATABASE": "cab-booking-api"
     },
     "mongoCred": {
-        "DB": "db-cab-booking-api",
+        "DATABASE": "cab-booking-api",
         "COLLECTION": "logs"
     }
 }

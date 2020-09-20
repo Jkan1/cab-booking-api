@@ -33,7 +33,7 @@ const checkDatabaseEmpty = () => {
 
 const insertAdmin = (adminName, adminMail, password) => {
 	return new Promise((resolve, reject) => {
-		db.query("INSERT INTO admin(admin_name, admin_email,password_hash) VALUES (?,?,?)", [adminName, adminMail, password], (err, data) => {
+		db.query("INSERT INTO admin(admin_name, admin_email,password) VALUES (?,?,?)", [adminName, adminMail, password], (err, data) => {
 			if (err) {
 				reject(err)
 			}
@@ -60,7 +60,7 @@ const insertIntoDatabase = () => {
 
 const getHashValue = (email) => {
 	return new Promise((resolve, reject) => {
-		db.query("SELECT password_hash FROM admin WHERE admin_email =?", [email], (err, data) => {
+		db.query("SELECT password FROM admin WHERE admin_email =?", [email], (err, data) => {
 			if (err) {
 				reject(err)
 			}

@@ -20,7 +20,7 @@ const checkExistingPendingBooking = (customerID) => {
 }
 
 const addSignup = (req, res) => {
-	db.query("INSERT INTO customer( customer_name, customer_email, customer_phone, password_hash) VALUES (?,?,?,?)", [req.body.name, req.body.email, req.body.phone, req.hash], function (err, data) {
+	db.query("INSERT INTO customer( customer_name, customer_email, customer_phone, password) VALUES (?,?,?,?)", [req.body.name, req.body.email, req.body.phone, req.hash], function (err, data) {
 		if (err) {
 			res.send({
 				statusCode: CONSTANTS.responseStatusCode.SERVER_ERROR,
@@ -46,7 +46,7 @@ const addSignup = (req, res) => {
 
 const checkEmailExistance = (req, res) => {
 	return new Promise((resolve, reject) => {
-		db.query("SELECT password_hash FROM customer WHERE customer_email=?", req.body.email, function (err, val) {
+		db.query("SELECT password FROM customer WHERE customer_email=?", req.body.email, function (err, val) {
 			if (err) {
 				reject(err);
 			}

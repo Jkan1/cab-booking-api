@@ -24,7 +24,7 @@ const generateHash = (password) => {
 }
 
 const hashToPasswordCheck = async (req, res, next) => {
-	let hash = await adminService.getHashValue(req.body.email)
+	let hash = await adminService.getHashValue(req.body.email);
 	if (hash == undefined) {
 		res.send({
 			statusCode: CONSTANTS.responseStatusCode.EMAIL_NOT_EXISTS,
@@ -33,7 +33,7 @@ const hashToPasswordCheck = async (req, res, next) => {
 		});
 	}
 	else {
-		bcrypt.compare(req.body.password, hash.password_hash, (err, match) => {
+		bcrypt.compare(req.body.password, hash.password, (err, match) => {
 			if (err) {
 				res.send({
 					statusCode: CONSTANTS.responseStatusCode.WRONG_PASSWORD,

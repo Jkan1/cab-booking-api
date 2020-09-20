@@ -33,7 +33,7 @@ const checkLoginCredential = async (req, res, next) => {
 		});
 	}
 	else {
-		req.hash = hash.password_hash;
+		req.hash = hash.password;
 		next();
 	}
 }
