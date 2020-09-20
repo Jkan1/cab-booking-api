@@ -19,7 +19,7 @@ const getLatLong = (address) => {
       if (err) {
         reject(err);
       }
-      if (result[0] == undefined) {
+      if (!result || result[0] == undefined) {
         reject('NOT FOUND');
       } else {
         const arrayLatLong = [result[0].longitude, result[0].latitude];
@@ -29,17 +29,5 @@ const getLatLong = (address) => {
   });
 }
 
-
 //Function export
 module.exports.getLatLong = getLatLong;
-
-// var distance = require('google-distance');
-// distance.apiKey = 'AIzaSyC7A0EVetIX5j4PEobIlo3KF1MGDHdsKzE';
-// distance.get(
-//   {
-//     origin: res[0].latitude.toString() + res[0].longitude.toString(),
-//     destination: 'San Diego, CA'
-//   },
-//   function (err, data) {
-//     if (err) return err
-//   });

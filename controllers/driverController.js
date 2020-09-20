@@ -23,7 +23,7 @@ const driverLogin = (req, res) => {
 					"driver_name": data[0].driver_name,
 					"driver_email": data[0].driver_email,
 					"driver_phone": data[0].driver_phone,
-					"driver_id": data[0].driver_car_number,
+					"driver_car_number": data[0].driver_car_number,
 					"token": req.token
 				}
 			});
